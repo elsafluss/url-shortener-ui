@@ -23,5 +23,21 @@ describe('display page', () => {
     cy.get(".button").should("exist")
   })
   
+  it("should show what the user has input into the form", () => {
+    cy.get(".title-input").should("have.value", "")
+    cy.get(".url-input").should("have.value", "")
+
+    cy.get(".title-input").type("don't panic")
+    cy.get(".url-input").type(
+      "https://www.bbc.co.uk/programmes/articles/1g84m0sXpnNCv84GpN2PLZG/the-game-30th-anniversary-edition"
+    )
+
+    cy.get(".title-input").should("have.value", "don't panic")
+    cy.get(".url-input").should(
+      "have.value",
+      "https://www.bbc.co.uk/programmes/articles/1g84m0sXpnNCv84GpN2PLZG/the-game-30th-anniversary-edition"
+    )
+  })
+
 })
 
