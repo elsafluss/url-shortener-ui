@@ -1,13 +1,23 @@
 /// <reference types="cypress" />
 
-context('display page', () => {
+describe('display page', () => {
   beforeEach(() => {
-    cy.visit('https://example.cypress.io/commands/actions')
+    cy.visit("http://localhost:3000/")
+    cy.intercept("GET", "http://localhost:3001",
+    { fixture: "../fixtures/post.json" },
+    {
+      statusCode: 200
+    }
+    )
   })
-
-  it('.type() - type into a DOM element', () => {
-    cy.get('.action-email')
-      .type('fake@email.com').should('have.value', 'fake@email.com')
+  
+  it('should show the page title and shortened URLs', () => {
+    cy.get(".header").contains('URL Shortener')
+    cy.get("div[class=url]").should("exist")
+    cy.get("p[class=no-urls]").should("not.exist")
   })
-
+  
+  
+  
 })
+

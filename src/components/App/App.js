@@ -31,7 +31,7 @@ export class App extends Component {
   render() {
     return (
       <main className="App">
-        <header>
+        <header className="header">
           <h1>URL Shortener</h1>
           <UrlForm createUrl={this.createUrl} />
         </header>
