@@ -54,7 +54,7 @@ describe("make new URL", () => {
     })
   })
 
-  it.only("should show a new shortened URL on submit", () => {
+  it("should show a new shortened URL on submit", () => {
     cy.get(".title-input").type("don't panic")
     cy.get(".url-input").type(
       "https://www.bbc.co.uk/programmes/articles/1g84m0sXpnNCv84GpN2PLZG/the-game-30th-anniversary-edition"
