@@ -38,6 +38,34 @@ describe('display page', () => {
       "https://www.bbc.co.uk/programmes/articles/1g84m0sXpnNCv84GpN2PLZG/the-game-30th-anniversary-edition"
     )
   })
+})
 
+describe("make new URL", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/")
+    cy.intercept("POST", "http://localhost:3001", {
+      body: {
+        id: 42,
+        long_url:
+          "https://www.bbc.co.uk/programmes/articles/1g84m0sXpnNCv84GpN2PLZG/the-game-30th-anniversary-edition",
+        short_url: "http://localhost:3001/useshorturl/2",
+        title: "don't panic",
+      },
+    })
+  })
+
+  it.only("should show a new shortened URL on submit", () => {
+    cy.get(".title-input").type("don't panic")
+    cy.get(".url-input").type(
+      "https://www.bbc.co.uk/programmes/articles/1g84m0sXpnNCv84GpN2PLZG/the-game-30th-anniversary-edition"
+    )
+    cy.get(".button").click()
+
+    cy.get(".url")
+      .children()
+      .contains("don't panic")
+      .siblings()
+      .contains("http://localhost:3001/useshorturl")
+  })
 })
 
