@@ -17,7 +17,11 @@ describe('display page', () => {
     cy.get("p[class=no-urls]").should("not.exist")
   })
   
-  
+  it("should show the form", () => {
+    cy.get(".title-input").should("exist").should("have.attr", "type", "text")
+    cy.get(".url-input").should("exist").should("have.attr", "type", "text")
+    cy.get(".button").should("exist")
+  })
   
 })
 
