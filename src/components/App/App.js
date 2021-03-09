@@ -16,9 +16,16 @@ export class App extends Component {
     getUrls().then((data) => this.setState({ urls: data.urls }))
   }
 
-  // get from form, run POST
-  sendUrls = (newURL) => {
-    console.log(newURL)
+  createUrl = (newURL) => {
+    sendUrls(newURL)
+    .then((response) => {
+      if (response.ok) {
+        const newestURL = response.json()
+        return newestURL
+      }
+    }).then((newestURL) => 
+      this.setState({ urls: [...this.state.urls, newestURL] })
+      )
   }
 
   render() {
@@ -26,7 +33,7 @@ export class App extends Component {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm sendUrls={sendUrls}/>
+          <UrlForm createUrl={this.createUrl} />
         </header>
 
         <UrlContainer urls={this.state.urls} />

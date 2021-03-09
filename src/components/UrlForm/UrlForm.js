@@ -18,7 +18,7 @@ class UrlForm extends Component {
     const newURL = {}
     newURL.long_url = this.state.long_url
     newURL.title = this.state.title
-    this.props.sendUrls(newURL)
+    this.props.createUrl(newURL)
     this.clearInputs();
   }
 
